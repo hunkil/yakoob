@@ -47,11 +47,12 @@ const userAgent = req.headers.get('user-agent') || 'unknown';
 if (
   req.method === 'GET' &&
   url.pathname === '/' &&
-  !req.headers.get('sec-fetch-dest')?.includes('image')
+  !String(req.headers.get('sec-fetch-dest') || '').includes('image')
 ) {
   console.log(
-  `[DEBUG] PATH=${url.pathname} DEST=${req.headers.get('sec-fetch-dest')}`
-);
+    `[DEBUG] PATH=${url.pathname} DEST=${req.headers.get('sec-fetch-dest')}`
+  );
+}
 
 // Subdomain detection
   // Examples:
