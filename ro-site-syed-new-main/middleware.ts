@@ -50,8 +50,9 @@ if (
   !String(req.headers.get('sec-fetch-dest') || '').includes('image')
 ) {
   console.log(
-  `[VISITOR] IP=${ip} UA=${userAgent} HOST=${hostname}`
-);
+    `[VISITOR] IP=${ip} UA=${userAgent} HOST=${hostname}`
+  );
+}  
 
 // Subdomain detection
   // Examples:
