@@ -33,7 +33,7 @@ const ip =
   req.headers.get('x-real-ip') ||
   'unknown';
 
-console.log('[VISITOR] IP=${ip} HOST=${hostname} PATH=${url.pathname});
+console.log(`[VISITOR] IP=${ip} HOST=${hostname} PATH=${url.pathname}`);
 
 // Subdomain detection
   // Examples:
