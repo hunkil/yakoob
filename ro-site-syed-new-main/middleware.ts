@@ -46,7 +46,8 @@ const userAgent = req.headers.get('user-agent') || 'unknown';
 
 if (
   req.method === 'GET' &&
-  url.pathname === '/'
+  url.pathname === '/' &&
+  !req.headers.get('sec-fetch-dest')?.includes('image')
 ) {
   console.log(
     `[VISITOR] IP=${ip} UA=${userAgent} HOST=${hostname}`
