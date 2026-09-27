@@ -33,10 +33,20 @@ const ip =
   req.headers.get('x-real-ip') ||
   'unknown';
 
+const blockedIPs = [
+  '27.59.16.66',
+  '106.192.109.195'
+];
+
+if (blockedIPs.includes(ip)) {
+  return new Response('Forbidden', { status: 403 });
+}
+
 const userAgent = req.headers.get('user-agent') || 'unknown';
 
 console.log(
   `[VISITOR] IP=${ip} UA=${userAgent} HOST=${hostname} PATH=${url.pathname}`
+);
 );
 // Subdomain detection
   // Examples:
