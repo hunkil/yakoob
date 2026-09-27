@@ -33,8 +33,11 @@ const ip =
   req.headers.get('x-real-ip') ||
   'unknown';
 
-console.log(`[VISITOR] IP=${ip} HOST=${hostname} PATH=${url.pathname}`);
+const userAgent = req.headers.get('user-agent') || 'unknown';
 
+console.log(
+  `[VISITOR] IP=${ip} UA=${userAgent} HOST=${hostname} PATH=${url.pathname}`
+);
 // Subdomain detection
   // Examples:
   // kent.mydomain.in -> matchedSubdomain: "kent"
