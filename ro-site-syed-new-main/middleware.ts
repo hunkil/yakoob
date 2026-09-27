@@ -25,10 +25,17 @@ export function middleware(req: NextRequest) {
   const forwardedHost = req.headers.get('x-forwarded-host');
   const rawHost = forwardedHost || req.headers.get('host') || '';
   const hostClean = rawHost.toLowerCase().trim();
-  const hostname = hostClean.split(':')[0].trim();
-  const proto = req.headers.get('x-forwarded-proto') || 'https';
+ const hostname = hostClean.split(':')[0].trim();
+const proto = req.headers.get('x-forwarded-proto') || 'https';
 
-  // Subdomain detection
+const ip =
+  req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+  req.headers.get('x-real-ip') ||
+  'unknown';
+
+console.log('[VISITOR] IP=${ip} HOST=${hostname} PATH=${url.pathname});
+
+// Subdomain detection
   // Examples:
   // kent.mydomain.in -> matchedSubdomain: "kent"
   // kent.roservicecentre24x7.in -> matchedSubdomain: "kent"
@@ -62,10 +69,13 @@ export function middleware(req: NextRequest) {
 
     // Pass custom request headers to downstream route handlers and layouts
     const requestHeaders = new Headers(req.headers);
-    requestHeaders.set('x-subdomain', matchedSubdomain);
-    requestHeaders.set('x-subdomain-brand', brandSlug);
-    requestHeaders.set('x-subdomain-host', hostClean);
-    requestHeaders.set('x-subdomain-proto', proto);
+
+requestHeaders.set('x-subdomain', matchedSubdomain);
+requestHeaders.set('x-subdomain-brand', brandSlug);
+requestHeaders.set('x-subdomain-host', hostClean);
+requestHeaders.set('x-subdomain-proto', proto);
+requestHeaders.set('x-visitor-ip', ip);
+     
 
     // 1. Subdomain Root ("/" or "") -> Brand Landing Page (e.g. /kent-service)
     if (url.pathname === '/' || url.pathname === '') {
