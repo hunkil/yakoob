@@ -44,9 +44,15 @@ if (blockedIPs.includes(ip)) {
 
 const userAgent = req.headers.get('user-agent') || 'unknown';
 
-console.log(
-  `[VISITOR] IP=${ip} UA=${userAgent} HOST=${hostname} PATH=${url.pathname}`
-);
+if (
+  req.method === 'GET' &&
+  url.pathname === '/'
+) {
+  console.log(
+    `[VISITOR] IP=${ip} UA=${userAgent} HOST=${hostname}`
+  );
+}
+
 // Subdomain detection
   // Examples:
   // kent.mydomain.in -> matchedSubdomain: "kent"
