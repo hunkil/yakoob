@@ -50,8 +50,7 @@ if (
   req.headers.get("sec-fetch-dest") === "document"
 ) {
   console.log(`[VISITOR] IP=${ip}`);
-}
-}  
+} 
 
 // Subdomain detection
   // Examples:
