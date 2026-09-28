@@ -137,13 +137,13 @@ export const LeadForm: React.FC<LeadFormProps> = ({
 
      if (response.ok || response.status === 200) {
 
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'conversion', {
-      send_to: 'AW-18441661483/i1WVCKuFiokdEKvY1dlE',
-      value: 1.0,
-      currency: 'INR'
-    });
-  }
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+  (window as any).gtag('event', 'conversion', {
+    send_to: 'AW-18441661483/i1WVCKuFiokdEKvY1d1E',
+    value: 1.0,
+    currency: 'INR'
+  });
+}
 
   setIsSuccess(true);
 
