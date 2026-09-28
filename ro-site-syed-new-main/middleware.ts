@@ -95,14 +95,22 @@ console.log("SUBDOMAIN MAP:", SUBDOMAIN_MAP);
 
   // If a brand subdomain is detected, rewrite internally without any 301/302 redirects
   // (Prevents Google Ads destination mismatch and ad disapprovals)
-  if (matchedSubdomain) {
-    const brandSlug = SUBDOMAIN_MAP[matchedSubdomain];
-    const targetBrandPath = `/${brandSlug}`;
+ let brandSlug = '';
+let targetBrandPath = '';
 
-    // Pass custom request headers to downstream route handlers and layouts
-    const requestHeaders = new Headers(req.headers);
+if (matchedSubdomain) {
+  brandSlug = SUBDOMAIN_MAP[matchedSubdomain];
+  targetBrandPath = `/${brandSlug}`;
 
-requestHeaders.set('x-subdomain', matchedSubdomain);
+  console.log("HOSTNAME:", hostname);
+  console.log("MATCHED SUBDOMAIN:", matchedSubdomain);
+  console.log("BRAND SLUG:", brandSlug);
+  console.log("TARGET PATH:", targetBrandPath);
+}
+
+const requestHeaders = new Headers(req.headers);
+
+requestHeaders.set('x-subdomain', matchedSubdomain || '');
 requestHeaders.set('x-subdomain-brand', brandSlug);
 requestHeaders.set('x-subdomain-host', hostClean);
 requestHeaders.set('x-subdomain-proto', proto);
