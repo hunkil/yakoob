@@ -45,12 +45,11 @@ if (blockedIPs.includes(ip)) {
 const userAgent = req.headers.get('user-agent') || 'unknown';
 
 if (
-  req.method === 'GET' &&
-  url.pathname === '/' &&
-  !String(req.headers.get('sec-fetch-dest') || '').includes('image')
+  url.pathname === "/" &&
+  req.method === "GET" &&
+  req.headers.get("sec-fetch-dest") === "document"
 ) {
-  console.log(
-    `[VISITOR] IP=${ip} UA=${userAgent} HOST=${hostname}`
+  console.log(`[VISITOR] IP=${ip}`);
   );
 }  
 
