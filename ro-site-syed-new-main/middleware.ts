@@ -49,26 +49,20 @@ if (
   req.method === "GET" &&
   req.headers.get("sec-fetch-dest") === "document"
 ) {
-  if (!globalThis.visitors) {
-    globalThis.visitors = new Map();
-  }
-
-  const count = (globalThis.visitors.get(ip) || 0) + 1;
-  globalThis.visitors.set(ip, count);
-
   const cookie = req.headers.get("cookie") || "";
 
   if (!cookie.includes("visited=yes")) {
-    console.log(`[VISITOR] IP=${ip} COUNT=${count}`);
+    console.log(`[VISITOR] IP=${ip}`);
 
     const res = NextResponse.next();
 
     res.cookies.set("visited", "yes", {
-      maxAge: 60 * 60 * 24
+      maxAge: 60 * 60 * 24,
     });
 
     return res;
   }
+}
 // Subdomain detection
   // Examples:
   // kent.mydomain.in -> matchedSubdomain: "kent"
