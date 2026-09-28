@@ -80,7 +80,9 @@ if (
       break;
     }
   }
-
+console.log("MATCHED SUBDOMAIN:", matchedSubdomain);
+console.log("SUBDOMAIN MAP:", SUBDOMAIN_MAP);
+  
   // Fallback check on first subdomain segment
   if (!matchedSubdomain) {
     const parts = hostname.split('.');
