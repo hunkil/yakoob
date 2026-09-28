@@ -53,7 +53,7 @@ export default function RootLayout({
   {/* Google Ads Conversion Tag */}
   <Script
     strategy="lazyOnload"
-    src="https://www.googletagmanager.com/gtag/js?id=AW-18344051619"
+   src="https://www.googletagmanager.com/gtag/js?id=AW-18441661483"
   />
 
   {/* Google Ads Config */}
