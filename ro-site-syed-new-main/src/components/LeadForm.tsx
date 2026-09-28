@@ -135,15 +135,25 @@ export const LeadForm: React.FC<LeadFormProps> = ({
         }),
       });
 
-      if (response.ok || response.status === 200) {
-        setIsSuccess(true);
-        setFormData({
-          fullName: '',
-          mobileNumber: '',
-          pinCode: '',
-          selectedBrand: preselectedBrand || 'Kent',
-          serviceType: SERVICE_OPTIONS[0],
-        });
+     if (response.ok || response.status === 200) {
+
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-18441661483/i1WVCKuFiokdEKvY1dlE',
+      value: 1.0,
+      currency: 'INR'
+    });
+  }
+
+  setIsSuccess(true);
+
+  setFormData({
+    fullName: '',
+    mobileNumber: '',
+    pinCode: '',
+    selectedBrand: preselectedBrand || 'Kent',
+    serviceType: SERVICE_OPTIONS[0],
+  });
       } else {
         setIsSuccess(true);
       }
