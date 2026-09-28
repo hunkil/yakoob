@@ -44,6 +44,8 @@ if (blockedIPs.includes(ip)) {
 
 const userAgent = req.headers.get('user-agent') || 'unknown';
 
+console.log(`[DEBUG] IP=${ip}`);
+
 if (
   url.pathname === "/" &&
   req.method === "GET" &&
