@@ -48,22 +48,43 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
       </head>
-      <body className="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-800 antialiased selection:bg-sky-500 selection:text-white">
-        <Script
-          strategy="lazyOnload"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18344051619"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18344051619');
-          `}
-        </Script>
-        <main className="flex-1">{children}</main>
-        <CallWidgets />
-      </body>
+      <body className="min-h-screen flex flex-col bg-slate-50 font-sans text-slate-800 antialiased">
+
+  {/* Google Ads Conversion Tag */}
+  <Script
+    strategy="lazyOnload"
+    src="https://www.googletagmanager.com/gtag/js?id=AW-18344051619"
+  />
+
+  {/* Google Ads Config */}
+  <Script id="google-analytics" strategy="lazyOnload">
+    {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18344051619');
+    `}
+  </Script>
+
+  {/* Microsoft Clarity */}
+  <Script id="microsoft-clarity" strategy="afterInteractive">
+    {`
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];
+          y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "ypa8gwqcmi");
+    `}
+  </Script>
+
+  <main className="flex-1">
+    {children}
+  </main>
+
+  <CallWidgets />
+
+</body>
     </html>
   );
 }
