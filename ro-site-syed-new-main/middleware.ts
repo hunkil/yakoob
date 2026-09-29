@@ -86,8 +86,6 @@ if (
     }
   }
 
-  console.log("MATCHED:", matchedSubdomain);
-  
   // Fallback check on first subdomain segment
   if (!matchedSubdomain) {
     const parts = hostname.split('.');
@@ -116,17 +114,13 @@ if (matchedSubdomain) {
     requestHeaders.set('x-visitor-ip', ip);
      
     // 1. Subdomain Root ("/" or "") -> Brand Landing Page (e.g. /kent-service)
-    if (url.pathname === '/' || url.pathname === '') {
-
-  console.log("REWRITING TO:", targetBrandPath);
-
-  url.pathname = targetBrandPath;
-
-  const response = NextResponse.rewrite(url, {
+      if (url.pathname === '/' || url.pathname === '') {
+      url.pathname = targetBrandPath;
+      const response = NextResponse.rewrite(url, {
+        request: {
           headers: requestHeaders,
         },
       });
-      
       response.headers.set('x-subdomain-routed', matchedSubdomain);
       return response;
     }
