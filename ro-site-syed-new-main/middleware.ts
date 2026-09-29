@@ -80,9 +80,7 @@ if (
       break;
     }
   }
-  console.log("HOST:", hostname);
-console.log("MATCHED:", matchedSubdomain);
-  
+
   // Fallback check on first subdomain segment
   if (!matchedSubdomain) {
     const parts = hostname.split('.');
@@ -101,12 +99,11 @@ console.log("MATCHED:", matchedSubdomain);
 
     // Pass custom request headers to downstream route handlers and layouts
     const requestHeaders = new Headers(req.headers);
-
-requestHeaders.set('x-subdomain', matchedSubdomain);
-requestHeaders.set('x-subdomain-brand', brandSlug);
-requestHeaders.set('x-subdomain-host', hostClean);
-requestHeaders.set('x-subdomain-proto', proto);
-requestHeaders.set('x-visitor-ip', ip);
+    requestHeaders.set('x-subdomain', matchedSubdomain);
+    requestHeaders.set('x-subdomain-brand', brandSlug);
+    requestHeaders.set('x-subdomain-host', hostClean);
+    requestHeaders.set('x-subdomain-proto', proto);
+    requestHeaders.set('x-visitor-ip', ip);
      
     // 1. Subdomain Root ("/" or "") -> Brand Landing Page (e.g. /kent-service)
     if (url.pathname === '/' || url.pathname === '') {
