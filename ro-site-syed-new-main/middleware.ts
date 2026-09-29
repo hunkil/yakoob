@@ -80,6 +80,8 @@ if (
       break;
     }
   }
+  console.log("HOST:", hostname);
+console.log("MATCHED:", matchedSubdomain);
   
   // Fallback check on first subdomain segment
   if (!matchedSubdomain) {
