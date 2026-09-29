@@ -98,9 +98,6 @@ if (matchedSubdomain) {
   const brandSlug = SUBDOMAIN_MAP[matchedSubdomain];
   const targetBrandPath = `/${brandSlug}`;
 
-  console.log("BRAND SLUG:", brandSlug);
-  console.log("PATHNAME:", url.pathname);
-
     // Pass custom request headers to downstream route handlers and layouts
     const requestHeaders = new Headers(req.headers);
     requestHeaders.set('x-subdomain', matchedSubdomain);
