@@ -126,6 +126,7 @@ if (matchedSubdomain) {
           headers: requestHeaders,
         },
       });
+      
       response.headers.set('x-subdomain-routed', matchedSubdomain);
       return response;
     }
