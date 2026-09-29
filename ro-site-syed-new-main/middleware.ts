@@ -21,17 +21,13 @@ const SUBDOMAIN_MAP: Record<string, string> = {
 export function middleware(req: NextRequest) {
   const url = req.nextUrl;
   
-  // Extract host from headers (handles Vercel, Cloud Run, reverse proxies, and local development)
+ // Extract host from headers (handles Vercel, Cloud Run, reverse proxies, and local development)
   const forwardedHost = req.headers.get('x-forwarded-host');
   const rawHost = forwardedHost || req.headers.get('host') || '';
   const hostClean = rawHost.toLowerCase().trim();
  const hostname = hostClean.split(':')[0].trim();
-
-console.log("X-FORWARDED-HOST:", forwardedHost);
-console.log("RAW HOST:", rawHost);
-console.log("HOST:", hostname);
-
 const proto = req.headers.get('x-forwarded-proto') || 'https';
+
 
 const ip =
   req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
