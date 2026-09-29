@@ -26,6 +26,11 @@ export function middleware(req: NextRequest) {
   const rawHost = forwardedHost || req.headers.get('host') || '';
   const hostClean = rawHost.toLowerCase().trim();
  const hostname = hostClean.split(':')[0].trim();
+
+console.log("X-FORWARDED-HOST:", forwardedHost);
+console.log("RAW HOST:", rawHost);
+console.log("HOST:", hostname);
+
 const proto = req.headers.get('x-forwarded-proto') || 'https';
 
 const ip =
@@ -81,6 +86,8 @@ if (
     }
   }
 
+  console.log("MATCHED:", matchedSubdomain);
+  
   // Fallback check on first subdomain segment
   if (!matchedSubdomain) {
     const parts = hostname.split('.');
