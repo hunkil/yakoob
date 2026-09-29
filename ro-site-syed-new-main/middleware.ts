@@ -100,9 +100,12 @@ if (
 
   // If a brand subdomain is detected, rewrite internally without any 301/302 redirects
   // (Prevents Google Ads destination mismatch and ad disapprovals)
- if (matchedSubdomain) {
-    const brandSlug = SUBDOMAIN_MAP[matchedSubdomain];
-    const targetBrandPath = `/${brandSlug}`;
+if (matchedSubdomain) {
+  const brandSlug = SUBDOMAIN_MAP[matchedSubdomain];
+  const targetBrandPath = `/${brandSlug}`;
+
+  console.log("BRAND SLUG:", brandSlug);
+  console.log("PATHNAME:", url.pathname);
 
     // Pass custom request headers to downstream route handlers and layouts
     const requestHeaders = new Headers(req.headers);
@@ -114,9 +117,12 @@ if (
      
     // 1. Subdomain Root ("/" or "") -> Brand Landing Page (e.g. /kent-service)
     if (url.pathname === '/' || url.pathname === '') {
-      url.pathname = targetBrandPath;
-      const response = NextResponse.rewrite(url, {
-        request: {
+
+  console.log("REWRITING TO:", targetBrandPath);
+
+  url.pathname = targetBrandPath;
+
+  const response = NextResponse.rewrite(url, {
           headers: requestHeaders,
         },
       });
