@@ -59,10 +59,11 @@ export default function RootLayout({
   {/* Google Ads Config */}
   <Script id="google-analytics" strategy="lazyOnload">
     {`
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-18441661483');
+     window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'AW-18441661483');
     `}
   </Script>
 
